@@ -4,6 +4,32 @@
   font-style: normal;
 }
 
+.imgLogo{
+  max-width: 150px;
+}
+#carouselExampleCaptions {
+  max-width: 1200px;  
+  margin: 0 auto;   
+}
+
+.bgCubipoint{
+  background-color: bisque;
+}
+
+#contenedorCartas .card-img-top {
+  height: 230px;
+  object-fit: contain;
+  background-color: white;
+  padding: 2px;
+}
+
+#detalleCard .card-img-top {
+  height: auto;
+  object-fit: contain;
+  background-color: white;
+}
+
+
 body {
   padding-bottom: 3rem;
 }
@@ -39,7 +65,11 @@ body {
 }
 
 .card-body .btn {
+  background-color: black;
+  color: white;
+  border: none;
   transition: 0.2s;
+  font-weight: bold;
 }
 
 .card-body .btn:hover {
@@ -48,19 +78,17 @@ body {
   font-weight: bold;
 }
 
-.card-body .btn{
-  background-color: black;
+.card {
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: white;
+  height: 100%;
 }
 
-.card-body{
+.card-body {
   background-color: #ffffff;
 }
 
-.card{
-  border-radius: 5px;
-  border-width: 2px;
-  border-color: white;
-}
 
 #footers {
     font-size: large;

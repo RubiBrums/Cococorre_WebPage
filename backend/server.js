@@ -33,16 +33,19 @@ app.get("/api/entidades", (req, res) => {
   const filtro = (req.query.tipo || "").toLowerCase().trim();
 
   const query = `
-    SELECT
-      e.id AS id_entidad,
-      p.id_personaje, p.nombre AS personaje_nombre, p.tipo AS personaje_tipo, p.descripcion AS personaje_descripcion, p.src_imgPersonaje,
-      i.id_item, i.nombre AS item_nombre, i.tipo AS item_tipo, i.descripcion AS item_descripcion, i.src_imgItem,
-      esc.id_escenario, esc.nombre AS escenario_nombre, esc.descripcion AS escenario_descripcion, esc.src_imgEscenario
-    FROM entidad e
-    LEFT JOIN personajes p ON e.id_personaje = p.id_personaje
-    LEFT JOIN items i ON e.id_item = i.id_item
-    LEFT JOIN escenarios esc ON e.id_escenario = esc.id_escenario
-    ORDER BY e.id ASC
+  SELECT
+    e.id AS id_entidad,
+    p.id_personaje, p.nombre AS personaje_nombre, p.tipo AS personaje_tipo, p.descripcion AS personaje_descripcion,
+    p.src_imgPersonaje, p.src_thumbnail AS personaje_thumbnail,
+    i.id_item, i.nombre AS item_nombre, i.tipo AS item_tipo, i.descripcion AS item_descripcion,
+    i.src_imgItem, i.src_thumbnail AS item_thumbnail,
+    esc.id_escenario, esc.nombre AS escenario_nombre, esc.descripcion AS escenario_descripcion,
+    esc.src_imgEscenario, esc.src_thumbnail AS escenario_thumbnail
+  FROM entidad e
+  LEFT JOIN personajes p ON e.id_personaje = p.id_personaje
+  LEFT JOIN items i ON e.id_item = i.id_item
+  LEFT JOIN escenarios esc ON e.id_escenario = esc.id_escenario
+  ORDER BY e.id ASC
   `;
 
   db.query(query, (err, rows) => {
@@ -62,7 +65,8 @@ app.get("/api/entidades", (req, res) => {
           nombre: r.personaje_nombre,
           descripcion: r.personaje_descripcion,
           subtipo: r.personaje_tipo,
-          src: r.src_imgPersonaje
+          src: r.src_imgPersonaje,
+          thumbnail: r.personaje_thumbnail
         });
       }
 
@@ -73,7 +77,8 @@ app.get("/api/entidades", (req, res) => {
           nombre: r.item_nombre,
           descripcion: r.item_descripcion,
           subtipo: r.item_tipo,
-          src: r.src_imgItem
+          src: r.src_imgItem,
+          thumbnail: r.item_thumbnail
         });
       }
 
@@ -84,59 +89,28 @@ app.get("/api/entidades", (req, res) => {
           nombre: r.escenario_nombre,
           descripcion: r.escenario_descripcion,
           subtipo: null,
-          src: r.src_imgEscenario
+          src: r.src_imgEscenario,
+          thumbnail: r.escenario_thumbnail
         });
       }
     }
 
+    // Filtro
     if (!filtro) {
       res.json(expanded);
       return;
     }
 
-    const filtroLower = filtro.toLowerCase();
-
-    const resultadoFiltrado = expanded.filter((item) => {
-      if (filtroLower === "personaje" || filtroLower === "personajes")
-        return item.fuente === "personaje";
-      if (filtroLower === "item" || filtroLower === "items")
-        return item.fuente === "item";
-      if (filtroLower === "escenario" || filtroLower === "escenarios")
-        return item.fuente === "escenario";
-
-      if (["protagonista", "npc", "enemigo", "boss"].includes(filtroLower)) {
-        return (
-          item.fuente === "personaje" &&
-          item.subtipo &&
-          item.subtipo.toLowerCase() === filtroLower
-        );
-      }
-
-      if (
-        [
-          "economia",
-          "hp",
-          "efecto",
-          "efectos",
-          "accesorio",
-          "accesorios",
-          "arma",
-          "armas"
-        ].includes(filtroLower)
-      ) {
-        return (
-          item.fuente === "item" &&
-          item.subtipo &&
-          item.subtipo.toLowerCase().startsWith(filtroLower.replace(/s$/, ""))
-        );
-      }
-
+    const resultadoFiltrado = expanded.filter(ent => {
+      if (ent.fuente === filtro) return true;
+      if (ent.subtipo && ent.subtipo.toLowerCase() === filtro) return true;
       return false;
     });
 
     res.json(resultadoFiltrado);
   });
 });
+
 
 // Ruta de fallback (para SPA)
 app.get(/.*/, (req, res) => {
