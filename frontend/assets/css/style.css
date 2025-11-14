@@ -102,3 +102,19 @@ body {
     color: rgb(0, 0, 0);
     text-decoration: none;
 }
+
+#banner_Remake{
+  width: 75%;
+  text-align: center;
+  padding-bottom: 20px;
+}
+#BannerCOCOCORRE{
+  width: 50%;
+  text-align: center;
+  padding-bottom: 20px;
+}
+#BannerItchio{
+  width: 65%;
+  text-align: center;
+  padding-bottom: 20px;
+}
