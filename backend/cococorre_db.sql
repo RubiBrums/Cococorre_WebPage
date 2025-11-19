@@ -50,30 +50,6 @@ ALTER TABLE `Entidad` ADD CONSTRAINT `fk_Personajes_id_personaje_Entidad` FOREIG
 
 ALTER TABLE `Entidad` ADD CONSTRAINT `fk_Items_id_item_Entidad` FOREIGN KEY (`id_item`) REFERENCES `Items` (`id_item`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Se insertan datos de las entidades con los id de los escenarios, personajes e items en la tabla -- 
-ALTER TABLE `Entidad`;
-INSERT INTO Entidad (id, id_escenario, id_personaje, id_item)
-VALUES
-(1,1,1,1),
-(2,2,2,2),
-(3,3,3,3),
-(4,4,4,4),
-(5,5,5,5),
-(6,6,6,6),
-(7,7,7,7),
-(8,8,8,8),
-(9,9,9,9),
-(10,10,10,10),
-(11,null,11,11),
-(12,null,12,12),
-(13,null,13,13),
-(14,null,14,14),
-(15,null,15,15),
-(16,null,16,16),
-(17,null,17,17),
-(18,null,18,18),
-(19,null,null,19),
-(20,null,null,20);
 
 -- Se insertan datos de los escenarios, personajes e items en las tablas -- 
 ALTER TABLE `Escenarios`;
@@ -136,3 +112,28 @@ VALUES
 (18,'Espuelas de cobre','Unas pulidas y endebles espuelas encontradas en la basura por Charlie, se las ha vendido a Helen por 20 granos de maíz. No tiene muchas utilidades, pero daña más a los enemigos que las espuelas oxidadas.','arma','item_espuelacobre.png','thumbnail_espuelacobre.png'),
 (19,'Espuelas de acero','Unas resistentes y fuertes espuelas de acero inoxidable que Gladiolo le ha regalado a Helen antes de entrar al matadero. Son tan filosas que pueden cortar metal.','arma','item_espuelaacero.png','thumbnail_espuelaacero.png'),
 (20,'Mazorca','Una gran mazorca con una considerable cantidad de maíz. ¡Con una de estas te harás rico!','economia','item_mazorca.png','thumbnail_mazorca.png');
+
+-- Se insertan datos de las entidades con los id de los escenarios, personajes e items en la tabla -- 
+ALTER TABLE `Entidad`;
+INSERT INTO Entidad (id, id_escenario, id_personaje, id_item)
+VALUES
+(1,1,1,1),
+(2,2,2,2),
+(3,3,3,3),
+(4,4,4,4),
+(5,5,5,5),
+(6,6,6,6),
+(7,7,7,7),
+(8,8,8,8),
+(9,9,9,9),
+(10,10,10,10),
+(11,null,11,11),
+(12,null,12,12),
+(13,null,13,13),
+(14,null,14,14),
+(15,null,15,15),
+(16,null,16,16),
+(17,null,17,17),
+(18,null,18,18),
+(19,null,null,19),
+(20,null,null,20);
