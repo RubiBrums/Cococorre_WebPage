@@ -88,7 +88,6 @@ VALUES
 (17,'Gallos de pelea','Los jóvenes gallos están tan cegados por sobrevivir que ya no les importa matarse entre sí. Han tenido una vida muy difícil, a veces sueñan con vivir en un hermoso campo lleno de flores... Sueños lejanos...','Enemigo','full_gallospelea.png','thumbnail_gallospelea.png'),
 (18,'Dui','Un viejo perro que no permite que los animales de la granja de Maggie escapen, tiene problemas con Helen y Daisy, debido a que siempre están intentando huir y romper cosas. Es un perro cansado, una vida de perros.','Enemigo','full_dui.png','thumbnail_dui.png');
 
-
 ALTER TABLE `Items`;
 INSERT INTO Items (id_item, nombre, descripcion, tipo, src_imgItem, src_thumbnail)
 VALUES
